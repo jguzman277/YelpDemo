@@ -1,24 +1,25 @@
 <%= image_tag @restaurant.image_url %>
 
-<p>
+<p class="form-group">
   <strong>Name:</strong>
   <%= @restaurant.name %>
 </p>
 
-<p>
+<p class="form-group">
   <strong>Address:</strong>
   <%= @restaurant.address %>
 </p>
 
-<p>
+<p class="form-group">
   <strong>Phone:</strong>
   <%= @restaurant.phone %>
 </p>
 
-<p>
+<p class="form-group">
   <strong>Website:</strong>
   <%= @restaurant.website %>
 </p>
 
+<%= link_to "Write a Review", new_restaurant_review_path(@restaurant), class: "btn btn-primary" %>
 <%= link_to 'Edit', edit_restaurant_path(@restaurant), class: "btn btn-link" %> |
 <%= link_to 'Back', restaurants_path, class: "btn btn-link" %>
