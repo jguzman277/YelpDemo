@@ -6,20 +6,30 @@
   			<%= @restaurant.name %>
 		</h2>
 
-		<p>
-		  <strong>Address:</strong>
-		  <%= @restaurant.address %>
-		</p>
+		<div class="star-rating" data-score= <%= @avg_rating %> ></div>
+		<% if @reviews.length != 1 %>
+			<div><%= "#{@reviews.length} reviews" %></div>
+		<% else %>
+			<div><%= "#{@reviews.length} review" %></div>
+		<% end %><br />
 
-		<p>
-		  <strong>Phone:</strong>
-		  <%= @restaurant.phone %>
-		</p>
+		<span>
+		  	<strong>Address:</strong>
+		  	<%= @restaurant.address %>
+		  	<br /><br />
+		</span>
 
-		<p>
+		<span>
+			<strong>Phone:</strong>
+			<%= @restaurant.phone %>
+			<br /><br />
+		</span>
+
+		<span>
 		  <strong>Website:</strong>
 		  <%= link_to @restaurant.website, @restaurant.website %>
-		</p>
+		  <br /><br />
+		</span>
 
 		<%= link_to "Write a Review", new_restaurant_review_path(@restaurant), class: "btn btn-primary" %>
 	</div>
@@ -28,10 +38,18 @@
 		<% if @reviews.blank? %>
 			<h3>No reviews yet. Be the first one to write one!</h3>
 		<% else %>
-			<% @reviews.each do |review| %>
-				<div class="star-rating" data-score= <%= review.rating %> ></div>
-				<p><%= review.comment %></p>
-			<% end %>
+			<table class="table">
+				<tbody>
+					<% @reviews.each do |review| %>
+						<tr>
+							<td>
+								<div class="star-rating" data-score= <%= review.rating %> ></div>
+								<div><%= h(review.comment).gsub(/\n/, '<br/>').html_safe %></div><br />
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
 		<% end %>
 	</div>
 
